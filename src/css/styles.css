@@ -1,0 +1,89 @@
+/*  */
+.movies-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+li {
+  list-style-type: none;
+}
+
+.movie-card {
+  width: calc(25% - 20px); /* Фіксована висота карточки */
+  margin: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+}
+
+.movie-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px 8px 0 0;
+}
+
+.movie-card .movie-info {
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.movie-card h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.movie-card p {
+  height: 80px;
+  overflow-y: auto;
+  margin: 0;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+/* Підкреслення для активного посилання */
+nav ul li a.active {
+  text-decoration: underline;
+}
+
+/* Стилі для інпута */
+header input[type="text"] {
+  width: 200px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-left: 20px;
+}
