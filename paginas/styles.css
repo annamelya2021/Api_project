@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-image: url("/fotos/txaloka\(3\).png");
+  background-repeat: repeat-y;
+  color: white;
+}
+
+.header {
+  position: relative;
+  background-image: url("/fotos/txaloka\(3\).png");
+  background-size: cover;
+  background-position: center;
+  z-index: 2; 
+  padding: 20px;
+  min-height: 200px;
+  font-size: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header-photo {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.menu {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.menu ul {
+  list-style: none;
+  margin-right: 20px;
+}
+
+.menu ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.menu ul li:last-child {
+  margin-right: 0;
+}
+
+.menu ul li a {
+  color: white;
+  text-decoration: none;
+}
+.h2{
+  color: white;
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: left; 
+  
+}
+.filters {
+  padding: 20px 0;
+}
+
+.filters .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filters input[type="text"],
+.filters select {
+  width: 45%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+.gallery {
+  padding: 20
+}
+
+.gallery-heading {
+  font-size: 32px;
+  color: white;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.movie-card {
+  width: 320.151px;
+ flex-shrink: 0;
+  border-radius: 20px;
+  border: 1px solid #969696;
+  background: url  (src="/fotos/The_Neon_Demon-386448800-large.jpg" alt="Poster de la dirección" class="small-movie-poster") lightgray 50% / cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.movie-poster {
+  width: 100%;
+  height: auto;
+  border-radius: 20px 20px 0 0; 
+}
+
+.small-movie-details {
+  padding: 10px; 
+}
+
+.small-movie-title {
+  font-size: 20px; 
+  margin-bottom: 5px; }
+
+.small-movie-info {
+  font-size: 16px; 
+  color: #ffffff; 
+  margin-bottom: 5px;
+}
+
+.movie-card {
+  background-color: #5c005c;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(116, 3, 182, 0.1);
+  overflow: hidden;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.movie-poster {
+  width: 250px; 
+  height: auto;
+  object-fit: cover;
+}
+
+.movie-details {
+  padding: 20px;
+  color: white; 
+}
+
+.movie-title {
+  margin-bottom: 20px;
+  font-size: 34px; 
+}
+
+.movie-director, .movie-genre, .movie-year, .movie-plot, .movie-rating {
+  margin-bottom: 10px;
+  font-size: 18px; 
+}
+
+.movie-genre {
+  color: #ffffff; 
+}
+
+.favorite-button {
+  background-color: #ec5cff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.favorite-button:hover {
+  background-color: #6d08b1;
+}
