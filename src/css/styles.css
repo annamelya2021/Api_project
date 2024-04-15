@@ -87,3 +87,7 @@ header input[type="text"] {
   border-radius: 5px;
   margin-left: 20px;
 }
+
+#default-image {
+  display: none; /* Початково приховуємо зображення за замовчуванням */
+}
