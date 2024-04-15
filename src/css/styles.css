@@ -88,6 +88,9 @@ header input[type="text"] {
   margin-left: 20px;
 }
 
+#default-image {
+  display: none; /* Початково приховуємо зображення за замовчуванням */
+}
 /* Propiedades del modal  */
 
 .modal {
