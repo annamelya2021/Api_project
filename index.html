@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -24,7 +24,58 @@
         placeholder="Search movies by title"
       />
     </header>
-    <div id="movies-container"></div>
+
+
+  
+
+
     <script src="index.js" type="module"></script>
   </body>
+</html>
+ -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./src/css/styles.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="index.html" class="home-link active">Home</a>
+            </li>
+            <li>
+                <a href="./favourite.html" id="favorites-link">Favorites</a>
+            </li>
+        </ul>
+    </nav>
+    <input
+        type="text"
+        id="search-input"
+        placeholder="Search movies by title"
+    />
+</header>
+<div id="movies-container"></div>
+
+
+
+<div id="modal" class="modal">
+    <div id="modal-content" class="modal-content">
+        
+        <div id="modal-poster"></div>
+        <div id="modal-info" class="modal-info"></div>
+    </div>
+</div>
+
+
+
+<script src="index.js" type="module"></script>
+</body>
 </html>
