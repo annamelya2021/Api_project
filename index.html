@@ -1,51 +1,61 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./src/css/styles.css">
 </head>
 <body>
-<header>
+<header class="header">
     <nav>
         <ul>
-            <li>
-                <a href="index.html" class="home-link active">Home</a>
-            </li>
-            <li>
-                <a href="./favourite.html" id="favorites-link">Favorites</a>
-            </li>
+          <li>
+            <a href="index.html" class="home-link active">Home</a>
+          </li>
+          <li>
+            <a href="./favourite.html" id="favorites-link">Favorites</a>
+          </li>
         </ul>
-    </nav>
-    <input
+      </nav>
+    </header>
+      <div class="container">
+        <section class="filters">
+            <div class="container">
+
+                <select name="genre" id="genre">
+                    <option value="">Todos los géneros</option>
+                    <option value="drama">Drama</option>
+                    <option value="comedy">Comedia</option>
+                    <option value="horror">Horror</option>
+                    <option value="action">Acción</option>
+                    
+                </select>
+            </div>
+        </section>
+        
+      <input
         type="text"
         id="search-input"
         placeholder="Search movies by title"
-    />
-    <div id="search-feedback">
-      <p id="search-feedback-invalid" style="color: red; display: none;">Invalid search query.</p>
-      
-  </div>
-</header>
-<div id="movies-container"></div>
-
-
-
-<div id="modal" class="modal">
-    <div id="modal-content" class="modal-content">
-        
-        <div id="modal-poster"></div>
-        <div id="modal-info" class="modal-info"></div>
+      />
+      <div id="search-feedback">
+        <p id="search-feedback-invalid" style="color: red; display: none;">Invalid search query.</p>
     </div>
-</div>
+    
+    <h2>¿Que quieres ver hoy?:</h2>
 
 
-
-<script src="index.js" type="module"></script>
-</body>
+    <div id="movies-container">
+      <!-- <img id="default-image" src="hhttps://amicus-vet.ru/images/statii/golubaya.jpg" alt="Default Image"> -->
+    </div>
+    <script src="index.js" type="module"></script>
+    <div id="modal" class="modal">
+      <div id="modal-content" class="modal-content">
+          
+          <div id="modal-poster"></div>
+          <div id="modal-info" class="modal-info"></div>
+      </div>
+  </div>
+  </body>
 </html>
