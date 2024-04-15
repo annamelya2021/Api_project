@@ -114,12 +114,10 @@ nav ul li a:hover {
   border-radius: 5px;
 }
 
-/* Підкреслення для активного посилання */
 nav ul li a.active {
   text-decoration: underline;
 }
 
-/* Стилі для інпута */
 header input[type="text"] {
   width: 200px;
   padding: 5px;
@@ -129,8 +127,9 @@ header input[type="text"] {
 }
 
 #default-image {
-  display: none; /* Початково приховуємо зображення за замовчуванням */
+  display: none;
 }
+
 .favoriteButton{
   background-color: #ec5cff;
   color: white;
@@ -140,6 +139,7 @@ header input[type="text"] {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 .favoriteButton:hover {
   background-color: #6d08b1;
 }
@@ -170,8 +170,7 @@ header input[type="text"] {
   max-width: 1000px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  
+  align-items: center;  
 }
 
 .modal-info {
@@ -190,4 +189,15 @@ header input[type="text"] {
 
 .modal-button {
   margin-top: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .modal-content {
+    margin: 20% auto;
+    margin-top: 50px;
+  }
+
+  .movie-card {
+    width: calc(50% - 20px);
+  }
 }
