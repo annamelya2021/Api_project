@@ -101,17 +101,14 @@ async function searchMovies() {
         if (searchQuery === "") {
             moviesContainer.innerHTML = "";
             fetchPopularMovies();
-            // searchFeedbackText.textContent = "";
             searchFeedbackInvalid.style.display = "none";
         } else if (movies.length === 0) {
             moviesContainer.innerHTML = "";
-            const defaultImage = document.createElement("img"); // Створюємо елемент <img>
+            const defaultImage = document.createElement("img"); 
 defaultImage.src = "https://avatars.dzeninfra.ru/get-zen_doc/59126/pub_5b9d6799bd0e2f00a9af9f39_5b9d67bd0739a700a9796316/scale_1200"; // Встановлюємо шлях до зображення
-defaultImage.alt = "Default Image"; // Встановлюємо альтернативний текст для зображення
+defaultImage.alt = "Poster Image"; 
 moviesContainer.appendChild(defaultImage); 
-            // searchFeedbackText.textContent = "No movies found.";
             searchFeedbackInvalid.style.display = "block";
-            // searchFeedbackInvalid.style.display = "none";
         } else {
             moviesContainer.innerHTML = "";
             const genres = await fetchGenres();
@@ -152,10 +149,10 @@ async function fetchGenres() {
 }
 
 
-let page = 1; // Початкова сторінка для підгрузки
-let loading = false; // Флаг для позначення процесу завантаження
+let page = 1; 
+let loading = false; 
 
-// Функція для підгрузки додаткових фільмів
+
 async function fetchMoreMovies() {
   if (loading) return;
   loading = true;
@@ -173,34 +170,14 @@ async function fetchMoreMovies() {
           movies.forEach((movie) => {
 
 
-
             if (!loadedMovies.includes(movie.id)) { 
 
-
-
-
-
-            if (!loadedMovies.includes(movie.id)) { 
-
-
-              const movieElement = createMovieCard(movie, genres); // Використання genres
+              const movieElement = createMovieCard(movie, genres); 
               if (movieElement) {
                   moviesContainer.appendChild(movieElement);
 
-
-
                   loadedMovies.push(movie.id);
               }
-
-
-
-
-
-
-                  loadedMovies.push(movie.id);
-              }
-
-
 
               }
           });
@@ -215,25 +192,21 @@ async function fetchMoreMovies() {
   }
 }
 
-// Додайте обробник подій для події прокручування
 window.addEventListener('scroll', () => {
-    const {
-        scrollTop,
-        scrollHeight,
-        clientHeight
-    } = document.documentElement;
+  const {
+      scrollTop,
+      scrollHeight,
+      clientHeight
+  } = document.documentElement;
 
-    // Перевірте, чи користувач дійшов до низу сторінки
-    if (scrollTop + clientHeight >= scrollHeight - 5) {
-        fetchMoreMovies(); // Викличте функцію для підгрузки додаткових фільмів
-    }
+  if (scrollHeight - scrollTop - clientHeight < 100) {
+      fetchMoreMovies();
+  }
 });
 
-// Початкове завантаження популярних фільмів
+
 fetchPopularMovies();
 
-
-//PARTE DE MIKEL
 //PARTE DE MIKEL
 async function openModal(movie) {
   const modal = document.getElementById("modal");
