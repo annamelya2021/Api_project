@@ -99,8 +99,7 @@ body {
 
 .movie-card {
   width: 320.151px;
-
-  flex-shrink: 0;
+ flex-shrink: 0;
   border-radius: 20px;
   border: 1px solid #969696;
   background: url  (src="/fotos/The_Neon_Demon-386448800-large.jpg" alt="Poster de la dirección" class="small-movie-poster") lightgray 50% / cover no-repeat;

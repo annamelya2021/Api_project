@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./src/css/styles.css" />
-  </head>
-  <body>
-    <header class="header">
-      <nav>
+    <link rel="stylesheet" href="./src/css/styles.css">
+</head>
+<body>
+<header class="header">
+    <nav>
         <ul>
           <li>
             <a href="index.html" class="home-link active">Home</a>
@@ -22,14 +22,14 @@
       <div class="container">
         <section class="filters">
             <div class="container">
-                <input type="text" placeholder="Buscar películas...">
+
                 <select name="genre" id="genre">
                     <option value="">Todos los géneros</option>
                     <option value="drama">Drama</option>
                     <option value="comedy">Comedia</option>
                     <option value="horror">Horror</option>
                     <option value="action">Acción</option>
-                    <button class="button">Favorito</button>
+                    
                 </select>
             </div>
         </section>
@@ -50,5 +50,12 @@
       <!-- <img id="default-image" src="hhttps://amicus-vet.ru/images/statii/golubaya.jpg" alt="Default Image"> -->
     </div>
     <script src="index.js" type="module"></script>
+    <div id="modal" class="modal">
+      <div id="modal-content" class="modal-content">
+          
+          <div id="modal-poster"></div>
+          <div id="modal-info" class="modal-info"></div>
+      </div>
+  </div>
   </body>
 </html>

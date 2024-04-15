@@ -1,5 +1,12 @@
 const apiKey = "523f61468ef50f89408cd3c6eee9a9a0";
 let genres;
+
+
+
+let loadedMovies = []; 
+
+
+
 async function fetchPopularMovies() {
   const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`;
 
@@ -14,8 +21,22 @@ async function fetchPopularMovies() {
 
     genres = await fetchGenres();
     movies.forEach((movie) => {
+
+
+      if (!loadedMovies.includes(movie.id)) {
+
+
       const movieElement = createMovieCard(movie, genres); 
       moviesContainer.appendChild(movieElement);
+
+
+
+
+      loadedMovies.push(movie.id);}
+
+
+
+
     });
   } catch (error) {
     console.error("Error fetching popular movies:", error);
@@ -27,10 +48,16 @@ function createMovieCard(movie, genres) {
 
   const movieCard = document.createElement("div");
   movieCard.classList.add("movie-card");
+  movieCard.addEventListener("click",()=>{
+    console.log()
+  });
+
 
   const imageElement = document.createElement("img");
   imageElement.src = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://img.freepik.com/free-photo/adorable-looking-kitten-with-yarn_23-2150886290.jpg?size=626&ext=jpg&ga=GA1.1.1599609068.1706814988&semt=ais'; // Замість 'default_poster.jpg' вставте шлях до вашого зображення за замовчуванням
   movieCard.appendChild(imageElement);
+  imageElement.addEventListener("click", () => openModal(movie));
+
 
   const movieInfo = document.createElement("div");
   movieInfo.classList.add("movie-info");
@@ -38,10 +65,6 @@ function createMovieCard(movie, genres) {
   const titleElement = document.createElement("h2");
   titleElement.textContent = movie.title;
   movieInfo.appendChild(titleElement);
-
-  const overviewElement = document.createElement("p");
-  overviewElement.textContent = movie.overview;
-  movieInfo.appendChild(overviewElement);
 
   const genresElement = document.createElement("div");
   genresElement.classList.add("genres");
@@ -53,9 +76,20 @@ function createMovieCard(movie, genres) {
       genresElement.appendChild(genreSpan);
     }
   });
+
+
   movieInfo.appendChild(genresElement);
 
   movieCard.appendChild(movieInfo);
+
+
+
+  const newButton = document.createElement("button");
+  newButton.classList.add("favoriteButton");         
+  newButton.innerHTML = "Favorite";
+            movieCard.appendChild(newButton);
+
+
 
   return movieCard;
 }
@@ -146,9 +180,23 @@ async function fetchMoreMovies() {
 
       if (movies.length > 0) {
           movies.forEach((movie) => {
+
+
+
+            if (!loadedMovies.includes(movie.id)) { 
+
+
               const movieElement = createMovieCard(movie, genres); // Використання genres
               if (movieElement) {
                   moviesContainer.appendChild(movieElement);
+
+
+
+                  loadedMovies.push(movie.id);
+              }
+
+
+
               }
           });
           page++;
@@ -178,3 +226,76 @@ window.addEventListener('scroll', () => {
 
 // Початкове завантаження популярних фільмів
 fetchPopularMovies();
+
+
+//PARTE DE MIKEL
+async function openModal(movie) {
+  const modal = document.getElementById("modal");
+  modal.innerHTML = "";
+
+  const modalContent = document.createElement("div");
+  modalContent.classList.add("modal-content");
+
+  const modalPoster = document.createElement("div");
+  modalPoster.id = "modal-poster";
+  const posterImg = document.createElement("img");
+  posterImg.src = "https://image.tmdb.org/t/p/w500" + movie.poster_path;
+  posterImg.alt = movie.title + " Poster";
+  modalPoster.appendChild(posterImg);
+
+  const modalInfo = document.createElement("div");
+  modalInfo.id = "modal-info";
+  
+  const titleElement = document.createElement("h2");
+  titleElement.textContent = movie.title;
+  modalInfo.appendChild(titleElement);
+
+  const releaseDateElement = document.createElement("p");
+  releaseDateElement.innerHTML = "<strong>Release Date:</strong> " + movie.release_date;
+  modalInfo.appendChild(releaseDateElement);
+
+  const plotElement = document.createElement("p");
+  plotElement.innerHTML = "<strong>Plot:</strong> " + movie.overview;
+  modalInfo.appendChild(plotElement);
+
+  const genresElement = document.createElement("p");
+  genresElement.innerHTML = "<strong>Genres:</strong> ";
+  const genresPlaceholder = document.createElement("span");
+  genresElement.appendChild(genresPlaceholder);
+
+  modalInfo.appendChild(genresElement);
+
+  modalContent.appendChild(modalPoster);
+  modalContent.appendChild(modalInfo);
+
+  const modalButton = document.createElement("button");
+  modalButton.innerHTML = "Favorite";
+  modalButton.classList.add("favoriteButton");
+  modalContent.appendChild(modalButton)
+
+  modal.appendChild(modalContent);
+
+  modal.style.display = "block";
+
+  try {
+      const genres = await getGenres(movie.genre_ids);
+      genresPlaceholder.textContent = genres;
+  } catch (error) {
+      console.error("Error fetching genres:", error);
+  }
+
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+}
+
+async function getGenres(genreIds) {
+  const genres = await fetchGenres();
+  const genreNames = genreIds.map(genreId => {
+      const genre = genres.find(g => g.id === genreId);
+      return genre ? genre.name : "";
+  });
+  return genreNames.join(", ");
+}
