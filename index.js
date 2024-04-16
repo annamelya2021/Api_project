@@ -339,12 +339,6 @@ async function openModal(movie) {
   }
 }
 
-
-
-
-
-
-
 async function getGenres(genreIds) {
   const genres = await fetchGenres();
   const genreNames = genreIds.map(genreId => {

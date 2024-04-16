@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> 
+    <title>Página de Inicio - Películas</title>
+</head>
+<body>
+       
+    <header class="header">
+        <div class="container">
+            <nav class="menu">
+                <ul>
+                    <li><a href="/index.html">Inicio</a></li>
+                    <li><a href="/favoritos.html">Favoritos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="filters">
+            <div class="container">
+                <input type="text" placeholder="Buscar películas...">
+                <select name="genre" id="genre">
+                    <option value="">Todos los géneros</option>
+                    <option value="drama">Drama</option>
+                    <option value="comedy">Comedia</option>
+                    <option value="horror">Horror</option>
+                    <option value="action">Acción</option>
+                </select>
+            </div>
+        </section>
+
+        <h2>Últimos estrenos:</h2>
+
+       
+     <div id="movies-container" class="movies-container">
+    <div class="moviCard">
+        <img src="/cine/fotos/The_Neon_Demon-386448800-large.jpg" alt="Poster de la película" class=movieCard">
+        <div class="small-movie-details">
+            <h3 class="small-movie-title">Título de la película</h3>
+            <div class="small-movie-info">
+                <p>Género: Género de la película</p>
+                
+            </div>
+            <button class="favorite-button">Favorito</button>
+        </div>
+    </div>
+
+   <div class="movie-card">
+        <img src="/cine/fotos/The_Neon_Demon-386448800-large.jpg" alt="Poster de la película" class="movie-poster">
+        <div class="movie-details">
+            <h3 class="movie-title">Neon Demon</h3>
+            <p class="movie-genre">Género: Horror</p>
+            <p class="movie-year">Año de estreno: 2016</p>
+            <p class="movie-plot">Argumento: Un modelo aspirante se sumerge en el mundo de la moda de Los Ángeles, donde su juventud y vitalidad son devoradas por un grupo de mujeres obsesionadas con la belleza que harán cualquier cosa para obtener lo que ella tiene.</p>
+            <p class="movie-rating">Rating: 5/5</p>
+            <button class="favorite-button">Favorito</button>
+        </div>
+    </div>
+</div>
