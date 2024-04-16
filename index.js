@@ -92,7 +92,8 @@ function createMovieCard(movie, genres) {
   movieCard.appendChild(movieInfo);
 
   const newButton = document.createElement("button");
-            newButton.innerHTML = "Favorite";
+  newButton.classList.add("favoriteButton");         
+  newButton.innerHTML = "Favorite";
             movieCard.appendChild(newButton);
 
   return movieCard;
@@ -319,6 +320,7 @@ async function openModal(movie) {
 
   const modalButton = document.createElement("button");
   modalButton.innerHTML = "Favorite";
+  modalButton.classList.add("favoriteButton");
   modalContent.appendChild(modalButton)
 
   modal.appendChild(modalContent);
