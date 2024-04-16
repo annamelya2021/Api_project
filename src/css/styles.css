@@ -130,7 +130,7 @@ header input[type="text"] {
   display: none;
 }
 
-.favoriteButton{
+button{
   background-color: #ec5cff;
   color: white;
   border: none;
@@ -140,7 +140,7 @@ header input[type="text"] {
   transition: background-color 0.3s ease;
 }
 
-.favoriteButton:hover {
+button:hover {
   background-color: #6d08b1;
 }
 

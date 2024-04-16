@@ -1,14 +1,18 @@
 const apiKey = "523f61468ef50f89408cd3c6eee9a9a0";
+
+
 let genres;
 
 
-
-let loadedMovies = []; 
-
+let loadedMovies = new Set();
 
 
-async function fetchPopularMovies() {
-  const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`;
+async function fetchPopularMovies(genreId = null) {
+  let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc`;
+  
+  if (genreId) {
+    url += `&with_genres=${genreId}`;
+  }
 
   try {
     const response = await fetch(url);
@@ -16,32 +20,38 @@ async function fetchPopularMovies() {
     const movies = data.results;
 
     const moviesContainer = document.getElementById("movies-container");
-
-    moviesContainer.innerHTML = "";
-
+    
     genres = await fetchGenres();
-    movies.forEach((movie) => {
-
-
-      if (!loadedMovies.includes(movie.id)) {
-
-
-      const movieElement = createMovieCard(movie, genres); 
-      moviesContainer.appendChild(movieElement);
-
-
-
-
-      loadedMovies.push(movie.id);}
-
-
-
-
-    });
+    
+    if (movies.length > 0) {
+      moviesContainer.innerHTML = ""; // Limpiar el contenedor solo si hay películas para mostrar
+      loadedMovies = new Set(); // Limpiar el conjunto de películas cargadas
+      movies.forEach((movie) => {
+        const movieElement = createMovieCard(movie, genres); 
+        moviesContainer.appendChild(movieElement);
+        loadedMovies.add(movie.id); // Agregar el ID de la película al conjunto
+      });
+    } else {
+      moviesContainer.innerHTML = "No se encontraron películas.";
+    }
   } catch (error) {
     console.error("Error fetching popular movies:", error);
   }
 }
+
+
+
+
+document.getElementById("genre-filter").addEventListener("change", function() {
+  const genreId = this.value;
+  fetchPopularMovies(genreId);
+});
+
+
+
+
+
+
 function createMovieCard(movie, genres) {
  
   if (!genres) return; 
@@ -77,22 +87,23 @@ function createMovieCard(movie, genres) {
     }
   });
 
-
   movieInfo.appendChild(genresElement);
 
   movieCard.appendChild(movieInfo);
-
-
 
   const newButton = document.createElement("button");
   newButton.classList.add("favoriteButton");         
   newButton.innerHTML = "Favorite";
             movieCard.appendChild(newButton);
 
-
-
   return movieCard;
 }
+
+
+
+
+
+
 
 async function searchMovies() {
     const searchQuery = document.getElementById("search-input").value.trim();
@@ -136,15 +147,26 @@ moviesContainer.appendChild(defaultImage);
     }
 }
 
-document.getElementById("search-input").addEventListener("input", searchMovies);
-
-fetchPopularMovies();
 
 
 
 document.getElementById("search-input").addEventListener("input", searchMovies);
 
 fetchPopularMovies();
+
+
+
+
+
+
+document.getElementById("search-input").addEventListener("input", searchMovies);
+
+fetchPopularMovies();
+
+
+
+
+
 
 async function fetchGenres() {
   const genreListUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`;
@@ -161,15 +183,43 @@ async function fetchGenres() {
 }
 
 
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("genre-filter").addEventListener("change", function() {
+      fetchPopularMovies(this.value);
+  });
+});
+
+
+
+
 let page = 1; // Початкова сторінка для підгрузки
+
+
+
+
 let loading = false; // Флаг для позначення процесу завантаження
+
+
+
+
 
 // Функція для підгрузки додаткових фільмів
 async function fetchMoreMovies() {
   if (loading) return;
   loading = true;
 
-  const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${page}`;
+  let url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${page}`;
+
+  const genreFilter = document.getElementById("genre-filter");
+  const selectedGenre = genreFilter.value;
+
+  if (selectedGenre !== "") {
+    url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${selectedGenre}&page=${page}`;
+  }
 
   try {
       const response = await fetch(url);
@@ -180,23 +230,12 @@ async function fetchMoreMovies() {
 
       if (movies.length > 0) {
           movies.forEach((movie) => {
-
-
-
-            if (!loadedMovies.includes(movie.id)) { 
-
-
-              const movieElement = createMovieCard(movie, genres); // Використання genres
-              if (movieElement) {
-                  moviesContainer.appendChild(movieElement);
-
-
-
-                  loadedMovies.push(movie.id);
-              }
-
-
-
+              if (!loadedMovies.has(movie.id)) {
+                  const movieElement = createMovieCard(movie, genres);
+                  if (movieElement) {
+                      moviesContainer.appendChild(movieElement);
+                      loadedMovies.add(movie.id);
+                  }
               }
           });
           page++;
@@ -210,22 +249,33 @@ async function fetchMoreMovies() {
   }
 }
 
+
+
+
+
+
 // Додайте обробник подій для події прокручування
 window.addEventListener('scroll', () => {
-    const {
-        scrollTop,
-        scrollHeight,
-        clientHeight
-    } = document.documentElement;
+  const {
+      scrollTop,
+      scrollHeight,
+      clientHeight
+  } = document.documentElement;
 
-    // Перевірте, чи користувач дійшов до низу сторінки
-    if (scrollTop + clientHeight >= scrollHeight - 5) {
-        fetchMoreMovies(); // Викличте функцію для підгрузки додаткових фільмів
-    }
+  if (scrollTop + clientHeight >= scrollHeight - 5) {
+      fetchMoreMovies();
+  }
 });
+
+
+
 
 // Початкове завантаження популярних фільмів
 fetchPopularMovies();
+
+
+
+
 
 
 //PARTE DE MIKEL
