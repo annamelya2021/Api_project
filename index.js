@@ -84,9 +84,11 @@ function createMovieCard(movie, genres) {
 
 
 
-  const newButton = document.createElement("button");
-            newButton.innerHTML = "Favorite";
-            movieCard.appendChild(newButton);
+   const newButton = document.createElement("button");
+         newButton.textContent = "Add to Favorites";
+         newButton.innerHTML = "Favorite";
+         newButton.addEventListener("click", () => addToFavorites(movie));
+         movieCard.appendChild(newButton);
 
 
 
@@ -268,8 +270,9 @@ async function openModal(movie) {
   modalContent.appendChild(modalInfo);
 
   const modalButton = document.createElement("button");
-  modalButton.innerHTML = "Favorite";
-  modalContent.appendChild(modalButton)
+        modalButton.innerHTML = "Favorite";
+        modalButton.addEventListener("click", () => addToFavorites(movie));
+        modalContent.appendChild(modalButton)
 
   modal.appendChild(modalContent);
 
@@ -297,3 +300,54 @@ async function getGenres(genreIds) {
   });
   return genreNames.join(", ");
 }
+
+
+
+// PARTE DE LANDER
+
+function addToFavorites(movie) {
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  const isDuplicate = favorites.some(favorite => favorite.id === movie.id);
+  if (isDuplicate) {
+    alert("This movie is already in favorites!");
+    return;
+  }
+  favorites.push(movie);
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+  alert("Movie added to Favorites");
+}
+
+async function showFavorites() {
+  const favoritesContainer = document.getElementById("favorites-container");
+  favoritesContainer.innerHTML = ""; // Limpiar el contenedor antes de mostrar los favoritos
+
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  if (favorites.length === 0) {
+    favoritesContainer.textContent = "No movie added to Favorites";
+  } else {
+    const genres = await fetchGenres();
+    favorites.forEach((movie) => {
+      const favoriteMovieCard = createMovieCard(movie, genres);
+      const removeButton = document.createElement("button");
+      removeButton.textContent = "Remove from Favorites";
+      removeButton.addEventListener("click", () => removeFromFavorites(movie));
+      favoriteMovieCard.appendChild(removeButton);
+      favoritesContainer.appendChild(favoriteMovieCard);
+    });
+  }
+}
+
+function removeFromFavorites(movie) {
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  favorites = favorites.filter((fav) => fav.id !== movie.id);
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+  showFavorites(); 
+}
+
+window.onload = function() {
+  if (window.location.pathname.includes("favourite.html")) {
+      showFavorites();
+  } else {
+  return "No movies here"
+  }
+};
