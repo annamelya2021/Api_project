@@ -298,6 +298,18 @@ button:hover {
 .modal-button {
   margin-top: 20px;
 }
+#notification {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 9999;
+}
 
 @media only screen and (max-width: 600px) {
   .modal-content {
