@@ -1,10 +1,6 @@
 
 const apiKey = "523f61468ef50f89408cd3c6eee9a9a0";
-
-
 let genres;
-
-
 let loadedMovies = new Set();
 
 
@@ -17,31 +13,27 @@ async function fetchPopularMovies(genreId = null) {
 
   try {
     const response = await fetch(url);
-    const data = await response.json();
-    const movies = data.results;
+    const { results: movies } = await response.json();
 
     const moviesContainer = document.getElementById("movies-container");
     
-    genres = await fetchGenres();
+    genres = await fetchGenres(apiKey);
     
     if (movies.length > 0) {
-      moviesContainer.innerHTML = ""; // Limpiar el contenedor solo si hay películas para mostrar
-      loadedMovies = new Set(); // Limpiar el conjunto de películas cargadas
+      moviesContainer.innerHTML = ""; 
+      loadedMovies.clear(); 
       movies.forEach((movie) => {
-        const movieElement = createMovieCard(movie, genres); 
+        const movieElement =  createMovieCard(movie, genres); 
         moviesContainer.appendChild(movieElement);
-        loadedMovies.add(movie.id); // Agregar el ID de la película al conjunto
+        loadedMovies.add(movie.id); 
       });
     } else {
-      moviesContainer.innerHTML = "No se encontraron películas.";
+      moviesContainer.textContent = "No se encontraron películas.";
     }
   } catch (error) {
     console.error("Error fetching popular movies:", error);
   }
 }
-
-
-
 
 document.getElementById("genre-filter").addEventListener("change", function() {
   const genreId = this.value;
@@ -50,27 +42,14 @@ document.getElementById("genre-filter").addEventListener("change", function() {
 
 
 
-
-
-
-function createMovieCard(movie, genres) {
- 
-  if (!genres) return; 
-
+export function createMovieCard(movie, genres) {
   const movieCard = document.createElement("div");
   movieCard.classList.add("movie-card");
-  movieCard.addEventListener("click",()=>{
-    console.log()
-  });
-
 
   const imageElement = document.createElement("img");
-  imageElement.src = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://img.freepik.com/free-photo/adorable-looking-kitten-with-yarn_23-2150886290.jpg?size=626&ext=jpg&ga=GA1.1.1599609068.1706814988&semt=ais'; // Замість 'default_poster.jpg' вставте шлях до вашого зображення за замовчуванням
+  imageElement.src = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://img.freepik.com/free-photo/adorable-looking-kitten-with-yarn_23-2150886290.jpg?size=626&ext=jpg&ga=GA1.1.1599609068.1706814988&semt=ais'; 
   movieCard.appendChild(imageElement);
   imageElement.addEventListener("click", () => openModal(movie));
-
-  imageElement.addEventListener("click", () => openModal(movie));
-
 
   const movieInfo = document.createElement("div");
   movieInfo.classList.add("movie-info");
@@ -79,96 +58,75 @@ function createMovieCard(movie, genres) {
   titleElement.textContent = movie.title;
   movieInfo.appendChild(titleElement);
 
-  const genresElement = document.createElement("div");
-  genresElement.classList.add("genres");
-  movie.genre_ids.forEach((genreId) => {
+  const genreNames = movie.genre_ids.map((genreId) => {
     const genre = genres.find((g) => g.id === genreId);
-    if (genre) {
-      const genreSpan = document.createElement("span");
-      genreSpan.textContent = genre.name;
-      genresElement.appendChild(genreSpan);
-    }
+    return genre ? genre.name : "";
   });
 
+  const genresText = genreNames.join(", ");
+
+  const genresElement = document.createElement("p");
+  genresElement.textContent = "Genres: " + genresText;
   movieInfo.appendChild(genresElement);
+
+  const ratingElement = document.createElement("p");
+  ratingElement.textContent = "Rating: " + movie.vote_average.toFixed(1);
+  movieInfo.appendChild(ratingElement);
 
   movieCard.appendChild(movieInfo);
 
   const newButton = document.createElement("button");
-  newButton.classList.add("favoriteButton");         
+  // newButton.classList.add("favoriteButton");         
   newButton.innerHTML = "Favorite";
-            movieCard.appendChild(newButton);
+  movieCard.appendChild(newButton);
 
   return movieCard;
 }
 
 
-
-
-
-
-
 async function searchMovies() {
-    const searchQuery = document.getElementById("search-input").value.trim();
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}`;
+  const searchQuery = document.getElementById("search-input").value.trim();
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}`;
 
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        const movies = data.results;
+  try {
+      const response = await fetch(url);
+      const data = await response.json();
+      const movies = data.results;
 
-        const moviesContainer = document.getElementById("movies-container");
-        const searchFeedbackText = document.getElementById("search-feedback-text");
-        const searchFeedbackInvalid = document.getElementById("search-feedback-invalid");
+      const moviesContainer = document.getElementById("movies-container");
+      const searchFeedbackText = document.getElementById("search-feedback-text");
+      const searchFeedbackInvalid = document.getElementById("search-feedback-invalid");
 
-        if (searchQuery === "") {
-            moviesContainer.innerHTML = "";
-            fetchPopularMovies();
-            // searchFeedbackText.textContent = "";
-            searchFeedbackInvalid.style.display = "none";
-        } else if (movies.length === 0) {
-            moviesContainer.innerHTML = "";
-            const defaultImage = document.createElement("img"); // Створюємо елемент <img>
-defaultImage.src = "https://avatars.dzeninfra.ru/get-zen_doc/59126/pub_5b9d6799bd0e2f00a9af9f39_5b9d67bd0739a700a9796316/scale_1200"; // Встановлюємо шлях до зображення
-defaultImage.alt = "Default Image"; // Встановлюємо альтернативний текст для зображення
-moviesContainer.appendChild(defaultImage); 
-            // searchFeedbackText.textContent = "No movies found.";
-            searchFeedbackInvalid.style.display = "block";
-            // searchFeedbackInvalid.style.display = "none";
-        } else {
-            moviesContainer.innerHTML = "";
-            const genres = await fetchGenres();
-            movies.forEach((movie) => {
-                const movieElement = createMovieCard(movie, genres);
-                moviesContainer.appendChild(movieElement);
-            });
-            searchFeedbackText.textContent = "";
-            searchFeedbackInvalid.style.display = "none";
-        }
-    } catch (error) {
-        console.error("Error searching movies:", error);
-    }
+      if (searchQuery === "") {
+          fetchPopularMovies();
+          searchFeedbackInvalid.style.display = "none";
+      } else if (movies.length === 0) {
+          moviesContainer.innerHTML = "";
+          const defaultImage = document.createElement("img");
+          defaultImage.src = "https://avatars.dzeninfra.ru/get-zen_doc/59126/pub_5b9d6799bd0e2f00a9af9f39_5b9d67bd0739a700a9796316/scale_1200"; 
+          defaultImage.alt = "Default Image"; 
+          defaultImage.classList.add("defaultmSearchImage");
+          moviesContainer.appendChild(defaultImage); 
+          searchFeedbackInvalid.style.display = "block";
+        
+      } else {
+          moviesContainer.innerHTML = "";
+          const genres = await fetchGenres();
+          movies.forEach((movie) => {
+              const movieElement = createMovieCard(movie, genres);
+              moviesContainer.appendChild(movieElement);
+          });
+          searchFeedbackText.textContent = "";
+          searchFeedbackInvalid.style.display = "none";
+      }
+  } catch (error) {
+      console.error("Error searching movies:", error);
+  }
 }
 
 
-
-
 document.getElementById("search-input").addEventListener("input", searchMovies);
-
 fetchPopularMovies();
-
-
-
-
-
-
-document.getElementById("search-input").addEventListener("input", searchMovies);
-
-fetchPopularMovies();
-
-
-
-
 
 
 async function fetchGenres() {
@@ -187,9 +145,6 @@ async function fetchGenres() {
 
 
 
-
-
-
 document.addEventListener("DOMContentLoaded", function() {
   document.getElementById("genre-filter").addEventListener("change", function() {
       fetchPopularMovies(this.value);
@@ -199,18 +154,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-let page = 1; // Початкова сторінка для підгрузки
+let page = 1; 
+let loading = false; 
 
-
-
-
-let loading = false; // Флаг для позначення процесу завантаження
-
-
-
-
-
-// Функція для підгрузки додаткових фільмів
 async function fetchMoreMovies() {
   if (loading) return;
   loading = true;
@@ -253,11 +199,6 @@ async function fetchMoreMovies() {
 }
 
 
-
-
-
-
-// Додайте обробник подій для події прокручування
 window.addEventListener('scroll', () => {
   const {
       scrollTop,
@@ -265,24 +206,13 @@ window.addEventListener('scroll', () => {
       clientHeight
   } = document.documentElement;
 
-  if (scrollTop + clientHeight >= scrollHeight - 5) {
+  if (scrollTop + clientHeight >= scrollHeight * 0.9) {
       fetchMoreMovies();
   }
 });
-
-
-
-
-// Початкове завантаження популярних фільмів
 fetchPopularMovies();
 
 
-
-
-
-
-//PARTE DE MIKEL
-//PARTE DE MIKEL
 async function openModal(movie) {
   const modal = document.getElementById("modal");
   modal.innerHTML = "";
@@ -293,7 +223,7 @@ async function openModal(movie) {
   const modalPoster = document.createElement("div");
   modalPoster.id = "modal-poster";
   const posterImg = document.createElement("img");
-  posterImg.src = "https://image.tmdb.org/t/p/w500" + movie.poster_path;
+  posterImg.src = movie.poster_path ? "https://image.tmdb.org/t/p/w500" + movie.poster_path : "https://img.freepik.com/free-photo/adorable-looking-kitten-with-yarn_23-2150886290.jpg?size=626&ext=jpg&ga=GA1.1.1599609068.1706814988&semt=ais";
   posterImg.alt = movie.title + " Poster";
   modalPoster.appendChild(posterImg);
 
