@@ -124,7 +124,7 @@ li {
   display: flex;
   align-items: center;
   flex-direction: column; 
-  padding: 20px;
+  padding: 5px 0 0 20px;
 }
 
 .movie-card h2 {
@@ -205,10 +205,11 @@ header input[type="text"] {
   display: none;
 }
 
-.defaultmSearchImage{
+.defaultSearchImage{
   width: 100%;
-  margin-left: auto;
+ 
   height: auto;
+  padding: 20px;
   object-fit: cover;
 }
 
@@ -298,6 +299,7 @@ button:hover {
 .modal-button {
   margin-top: 20px;
 }
+
 #notification {
   display: none;
   position: fixed;
@@ -309,6 +311,14 @@ button:hover {
   padding: 10px 20px;
   border-radius: 5px;
   z-index: 9999;
+}
+
+.swal2-confirm.swal2-styled {
+  background-color: #ec5cff !important;
+  color: white !important;
+  width: 100% !important;
+  margin: auto !important;
+  display: block !important;
 }
 
 @media only screen and (max-width: 600px) {
