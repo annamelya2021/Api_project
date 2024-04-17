@@ -254,6 +254,7 @@ async function openModal(movie) {
   modalContent.appendChild(modalInfo);
 
   const modalButton = document.createElement("button");
+  modalButton.classList.add("modalButton");
         modalButton.innerHTML = "Favorite";
         modalButton.addEventListener("click", () => addToFavorites(movie));
         modalContent.appendChild(modalButton)
