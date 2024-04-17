@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./src/css/styles.css" />
-  </head>
-  <body>
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <a href="index.html" class="home-link active">Home</a>
-          </li>
-          <li>
-            <a href="./favourite.html" id="favorites-link">Favorites</a>
-          </li>
-        </ul>
-      </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./src/css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <nav>
+      <ul>
+        <li>
+          <a href="index.html" class="home-link active">Home</a>
+        </li>
+        <li>
+          <a href="./favourite.html" id="fhome-link">Favorites</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Agrega un contenedor envolvente para los elementos -->
+  <div class="container-wrapper">
+    <!-- Contenedor para el campo de búsqueda y el filtro de géneros -->
+    <div class="container">
+      <!-- Campo de búsqueda -->
       <input
         type="text"
         id="search-input"
@@ -25,12 +32,52 @@
       />
       <div id="search-feedback">
         <p id="search-feedback-invalid" style="color: red; display: none;">Invalid search query.</p>
+      </div>
+
+      <!-- Filtro de géneros -->
+      <select id="genre-filter" onchange="fetchPopularMovies(this.value)"> 
+        <option value="">Todos los géneros</option>
+        <option value="28">Action</option>
+        <option value="12">Adventure</option>
+        <option value="16">Animation</option>
+        <option value="35">Comedy</option>
+        <option value="80">Crime</option>
+        <option value="99">Documentary</option>
+        <option value="18">Drama</option>
+        <option value="10751">Family</option>
+        <option value="14">Fantasy</option>
+        <option value="36">History</option>
+        <option value="27">Horror</option>
+        <option value="10402">Music</option>
+        <option value="9648">Mystery</option>
+        <option value="10749">Romance</option>
+        <option value="878">Science Fiction</option>
+        <option value="10770">TV Movie</option>
+        <option value="53">Thriller</option>
+        <option value="10752">War</option>
+        <option value="37">Western</option>
+      </select>
     </div>
+
     
-    </header>
+    <div class="bottom-row">
+      <h2>Wanna see a movie?:</h2>
+    </div>
+  </div>
+
+      <div class="container">
+        
     <div id="movies-container">
       <!-- <img id="default-image" src="hhttps://amicus-vet.ru/images/statii/golubaya.jpg" alt="Default Image"> -->
     </div>
     <script src="index.js" type="module"></script>
+    <div id="modal" class="modal">
+      <div id="modal-content" class="modal-content">
+          
+          <div id="modal-poster"></div>
+          <div id="modal-info" class="modal-info"></div>
+      </div>
+  </div>
+</main>
   </body>
 </html>
