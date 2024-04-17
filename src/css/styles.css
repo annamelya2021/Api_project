@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;7acti00&display=swap');
 
 * {
   margin: 0;
@@ -24,7 +24,9 @@ li {
 }
 
 .movie-card {
+  position: relative;
   width: calc(25% - 20px);
+  height: 500px; 
   flex-shrink: 0;
   border-radius: 20px;
   border: 1px solid #969696;
@@ -37,7 +39,8 @@ li {
 
 .movie-card img {
   width: 100%;
-  height: auto;
+  height: 70%;
+  /* height: auto; */
   border-radius: 20px 20px 0 0; 
 }
 
@@ -114,7 +117,7 @@ nav ul li a:hover {
   border-radius: 5px;
 }
 
-nav ul li a.active {
+.active {
   text-decoration: underline;
 }
 
@@ -130,7 +133,32 @@ header input[type="text"] {
   display: none;
 }
 
+.defaultmSearchImage{
+  width: 100%;
+  margin-left: auto;
+  height: auto;
+  object-fit: cover;
+}
+
 button{
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+  /* margin: 10px; */
+  background-color: #ec5cff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.favoriteButton{
+  position: relative; 
+  /* bottom: 0; 
+  left: 0;   */
+  /* margin: 10px; */
   background-color: #ec5cff;
   color: white;
   border: none;
