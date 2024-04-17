@@ -1,5 +1,5 @@
+import {apiKey} from "./src/js/Api_key.js";
 
-const apiKey = "523f61468ef50f89408cd3c6eee9a9a0";
 let genres;
 let loadedMovies = new Set();
 
@@ -75,13 +75,16 @@ export function createMovieCard(movie, genres) {
 
   movieCard.appendChild(movieInfo);
 
-  const newButton = document.createElement("button");
-  // newButton.classList.add("favoriteButton");         
-  newButton.innerHTML = "Favorite";
-  movieCard.appendChild(newButton);
+   const newButton = document.createElement("button");
+         newButton.textContent = "Add to Favorites";
+         newButton.innerHTML = "Favorite";
+         newButton.addEventListener("click", () => addToFavorites(movie));
+         movieCard.appendChild(newButton);
+    
 
   return movieCard;
 }
+
 
 
 async function searchMovies() {
@@ -94,7 +97,6 @@ async function searchMovies() {
       const movies = data.results;
 
       const moviesContainer = document.getElementById("movies-container");
-      const searchFeedbackText = document.getElementById("search-feedback-text");
       const searchFeedbackInvalid = document.getElementById("search-feedback-invalid");
 
       if (searchQuery === "") {
@@ -105,7 +107,7 @@ async function searchMovies() {
           const defaultImage = document.createElement("img");
           defaultImage.src = "https://avatars.dzeninfra.ru/get-zen_doc/59126/pub_5b9d6799bd0e2f00a9af9f39_5b9d67bd0739a700a9796316/scale_1200"; 
           defaultImage.alt = "Default Image"; 
-          defaultImage.classList.add("defaultmSearchImage");
+          defaultImage.classList.add("defaultSearchImage");
           moviesContainer.appendChild(defaultImage); 
           searchFeedbackInvalid.style.display = "block";
         
@@ -116,7 +118,6 @@ async function searchMovies() {
               const movieElement = createMovieCard(movie, genres);
               moviesContainer.appendChild(movieElement);
           });
-          searchFeedbackText.textContent = "";
           searchFeedbackInvalid.style.display = "none";
       }
   } catch (error) {
@@ -253,9 +254,17 @@ async function openModal(movie) {
   modalContent.appendChild(modalInfo);
 
   const modalButton = document.createElement("button");
-  modalButton.innerHTML = "Favorite";
-  modalButton.classList.add("favoriteButton");
-  modalContent.appendChild(modalButton)
+  modalButton.classList.add("modalButton");
+  if (window.location.pathname.includes("favourite.html")) {
+    modalButton.textContent = "Remove from Favorites";
+    modalButton.addEventListener("click", () => removeFromFavorites(movie));
+  } else {
+    modalButton.textContent = "Favorite";
+    modalButton.addEventListener("click", () => addToFavorites(movie));
+  }
+  
+  
+        modalContent.appendChild(modalButton)
 
   modal.appendChild(modalContent);
 
@@ -283,3 +292,57 @@ async function getGenres(genreIds) {
   });
   return genreNames.join(", ");
 }
+
+
+
+function addToFavorites(movie) {
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  const isDuplicate = favorites.some(favorite => favorite.id === movie.id);
+  if (isDuplicate) {
+    Swal.fire("This movie is already in favorites!");
+    return;
+  }
+  favorites.push(movie);
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+  Swal.fire("Movie added to Favorites");
+}
+
+
+async function showFavorites() {
+  const favoritesContainer = document.getElementById("favorites-container");
+  favoritesContainer.innerHTML = "";
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  if (favorites.length === 0) {
+    favoritesContainer.textContent = "No movie added to Favorites";
+  } else {
+    const genres = await fetchGenres();
+    favorites.forEach((movie) => {
+      const favoriteMovieCard = createMovieCard(movie, genres);
+      const removeButton = document.createElement("button");
+      removeButton.textContent = "Remove from Favorites";
+      removeButton.addEventListener("click", () => removeFromFavorites(movie));
+      favoriteMovieCard.appendChild(removeButton);
+      favoritesContainer.appendChild(favoriteMovieCard);
+    });
+  }
+}
+
+function removeFromFavorites(movie) {
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  favorites = favorites.filter((fav) => fav.id !== movie.id);
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+  showFavorites(); 
+
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
+}
+
+
+
+window.onload = function() {
+  if (window.location.pathname.includes("favourite.html")) {
+      showFavorites();
+  } else {
+    
+  }
+};

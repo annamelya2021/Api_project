@@ -12,15 +12,22 @@
 .container {
   display: flex;
   align-items: center;
-  width: 100%; }
-
-#search-input, #genre-filter {
-  flex-grow: 1; 
-  margin-right: 10px; 
+  width: 100%; 
+}
+  #search-input,#genre-filter  {
+    flex-grow: 1; 
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 20px; 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    box-sizing: border-box; 
 }
 
+
 #genre-filter {
-  flex-grow: 0.5; 
+    flex-grow: 0.5; 
+
 }
 
 .bottom-row {
@@ -32,8 +39,9 @@
 }
 
 h2 {
-  margin-top: 20px; 
-  margin-left: 10px; 
+
+  margin: 20px; 
+  width: 100%;
 }
 
 
@@ -69,12 +77,6 @@ body {
   margin-top: 20px; 
 }
 
-h2 {
-  margin-top: 20px; 
-  margin-left: 90px; 
-  margin-bottom: 20px;
-}
-
 
 .container-wrapper {
   margin-top: 40px; }
@@ -101,7 +103,10 @@ li {
   display: inline-block;
   vertical-align: top;
   box-sizing: border-box;
-  margin-bottom: 20px; 
+  margin-bottom: 10px; 
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .movie-card img {
@@ -119,7 +124,7 @@ li {
   display: flex;
   align-items: center;
   flex-direction: column; 
-  padding: 20px;
+  padding: 5px 0 0 20px;
 }
 
 .movie-card h2 {
@@ -163,7 +168,7 @@ header {
 
 nav ul {
   list-style-type: none;
-  padding: 0;
+  padding: 0 0 0 20px;
   margin: 0;
 }
 
@@ -200,10 +205,11 @@ header input[type="text"] {
   display: none;
 }
 
-.defaultmSearchImage{
+.defaultSearchImage{
   width: 100%;
-  margin-left: auto;
+ 
   height: auto;
+  padding: 20px;
   object-fit: cover;
 }
 
@@ -221,7 +227,7 @@ button{
   transition: background-color 0.3s ease;
 }
 
-.favoriteButton{
+.modalButton{
   position: relative; 
   /* bottom: 0; 
   left: 0;   */
@@ -281,9 +287,38 @@ button:hover {
   text-decoration: none;
   cursor: pointer;
 }
+#favorites-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
 .modal-button {
   margin-top: 20px;
+}
+
+#notification {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 9999;
+}
+
+.swal2-confirm.swal2-styled {
+  background-color: #ec5cff !important;
+  color: white !important;
+  width: 100% !important;
+  margin: auto !important;
+  display: block !important;
 }
 
 @media only screen and (max-width: 600px) {
