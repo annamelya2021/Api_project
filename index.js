@@ -80,9 +80,11 @@ export function createMovieCard(movie, genres) {
          newButton.innerHTML = "Favorite";
          newButton.addEventListener("click", () => addToFavorites(movie));
          movieCard.appendChild(newButton);
+    
 
   return movieCard;
 }
+
 
 
 async function searchMovies() {
@@ -255,8 +257,15 @@ async function openModal(movie) {
 
   const modalButton = document.createElement("button");
   modalButton.classList.add("modalButton");
-        modalButton.innerHTML = "Favorite";
-        modalButton.addEventListener("click", () => addToFavorites(movie));
+  if (window.location.pathname.includes("favourite.html")) {
+    modalButton.textContent = "Remove from Favorites";
+    modalButton.addEventListener("click", () => removeFromFavorites(movie));
+  } else {
+    modalButton.textContent = "Favorite";
+    modalButton.addEventListener("click", () => addToFavorites(movie));
+  }
+  
+  
         modalContent.appendChild(modalButton)
 
   modal.appendChild(modalContent);
@@ -327,6 +336,8 @@ function removeFromFavorites(movie) {
   localStorage.setItem("favorites", JSON.stringify(favorites));
   showFavorites(); 
 }
+
+
 
 window.onload = function() {
   if (window.location.pathname.includes("favourite.html")) {
