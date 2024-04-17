@@ -319,8 +319,7 @@ function addToFavorites(movie) {
 
 async function showFavorites() {
   const favoritesContainer = document.getElementById("favorites-container");
-  favoritesContainer.innerHTML = ""; // Limpiar el contenedor antes de mostrar los favoritos
-
+  favoritesContainer.innerHTML = "";
   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   if (favorites.length === 0) {
     favoritesContainer.textContent = "No movie added to Favorites";
@@ -348,6 +347,6 @@ window.onload = function() {
   if (window.location.pathname.includes("favourite.html")) {
       showFavorites();
   } else {
-  return "No movies here"
+    
   }
 };
