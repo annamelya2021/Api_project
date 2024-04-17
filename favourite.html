@@ -1,73 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="stylesheet" href="./src/css/styles.css">
-</head>
-<body>
-  <header class="header">
-    <nav>
-      <ul>
-        <li>
-          <a href="index.html" class="home-link active">Home</a>
-        </li>
-        <li>
-          <a href="./favourite.html" id="fhome-link">Favorites</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
- 
-  <div class="container-wrapper">
-   
-    <div class="container">
-            <input
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/css/styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="index.html" id="home-link">Home</a></li>
+          <li>
+            <a href="favourite.html" id="favorites-link active">Favorites</a>
+          </li>
+        </ul>
+      </nav>
+      <input
         type="text"
         id="search-input"
         placeholder="Search movies by title"
       />
-      <div id="search-feedback">
-        <p id="search-feedback-invalid" style="color: red; display: none;">Invalid search query.</p>
-      </div>
-
-      <!-- Filtro de géneros -->
-      <select id="genre-filter" onchange="fetchPopularMovies(this.value)"> 
-        <option value="">Todos los géneros</option>
-        <option value="28">Action</option>
-        <option value="12">Adventure</option>
-        <option value="16">Animation</option>
-        <option value="35">Comedy</option>
-        <option value="80">Crime</option>
-        <option value="99">Documentary</option>
-        <option value="18">Drama</option>
-        <option value="10751">Family</option>
-        <option value="14">Fantasy</option>
-        <option value="36">History</option>
-        <option value="27">Horror</option>
-        <option value="10402">Music</option>
-        <option value="9648">Mystery</option>
-        <option value="10749">Romance</option>
-        <option value="878">Science Fiction</option>
-        <option value="10770">TV Movie</option>
-        <option value="53">Thriller</option>
-        <option value="10752">War</option>
-        <option value="37">Western</option>
-      </select>
-    </div>
-
- 
-    <div class="bottom-row">
-      <h2>Choose your favorite:</h2>
-    </div>
-  </div>
-  
-    
-    <main>
-      <div id="favourite-movies-container"></div>
-    </main>
+    </header>
     <script src="index.js" type="module"></script>
   </body>
 </html>
