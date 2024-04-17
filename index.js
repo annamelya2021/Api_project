@@ -299,17 +299,30 @@ async function getGenres(genreIds) {
 
 // PARTE DE LANDER
 
+// function addToFavorites(movie) {
+//   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+//   const isDuplicate = favorites.some(favorite => favorite.id === movie.id);
+//   if (isDuplicate) {
+//     alert("This movie is already in favorites!");
+//     return;
+//   }
+//   favorites.push(movie);
+//   localStorage.setItem("favorites", JSON.stringify(favorites));
+//   alert("Movie added to Favorites");
+// }
+
 function addToFavorites(movie) {
   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   const isDuplicate = favorites.some(favorite => favorite.id === movie.id);
   if (isDuplicate) {
-    alert("This movie is already in favorites!");
+    Swal.fire("This movie is already in favorites!");
     return;
   }
   favorites.push(movie);
   localStorage.setItem("favorites", JSON.stringify(favorites));
-  alert("Movie added to Favorites");
+  Swal.fire("Movie added to Favoritesпше");
 }
+
 
 async function showFavorites() {
   const favoritesContainer = document.getElementById("favorites-container");
