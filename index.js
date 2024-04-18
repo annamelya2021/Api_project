@@ -96,7 +96,6 @@ async function searchMovies() {
       const movies = data.results;
 
       const moviesContainer = document.getElementById("movies-container");
-      // const searchFeedbackText = document.getElementById("search-feedback-text");
       const searchFeedbackInvalid = document.getElementById("search-feedback-invalid");
 
       if (searchQuery === "") {
@@ -107,7 +106,7 @@ async function searchMovies() {
           const defaultImage = document.createElement("img");
           defaultImage.src = "https://avatars.dzeninfra.ru/get-zen_doc/59126/pub_5b9d6799bd0e2f00a9af9f39_5b9d67bd0739a700a9796316/scale_1200"; 
           defaultImage.alt = "Default Image"; 
-          defaultImage.classList.add("defaultmSearchImage");
+          defaultImage.classList.add("defaultSearchImage");
           moviesContainer.appendChild(defaultImage); 
           searchFeedbackInvalid.style.display = "block";
         
@@ -118,7 +117,6 @@ async function searchMovies() {
               const movieElement = createMovieCard(movie, genres);
               moviesContainer.appendChild(movieElement);
           });
-          // searchFeedbackText.textContent = "";
           searchFeedbackInvalid.style.display = "none";
       }
   } catch (error) {
@@ -295,20 +293,6 @@ async function getGenres(genreIds) {
 }
 
 
-
-// PARTE DE LANDER
-
-// function addToFavorites(movie) {
-//   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-//   const isDuplicate = favorites.some(favorite => favorite.id === movie.id);
-//   if (isDuplicate) {
-//     alert("This movie is already in favorites!");
-//     return;
-//   }
-//   favorites.push(movie);
-//   localStorage.setItem("favorites", JSON.stringify(favorites));
-//   alert("Movie added to Favorites");
-// }
 
 function addToFavorites(movie) {
   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
