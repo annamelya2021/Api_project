@@ -22,8 +22,14 @@ A continuación se listan los conocimientos necesarios para entender y refinar e
 ### Procedimiento de Instalación
 Para ejecutar el proyecto localmente, sigue estos pasos:
 1. Clona este repositorio: `git clone git@github.com:annamelya2021/Api_project.git`
-2. Navega al directorio del proyecto: `cd Api_project`
+2. Navega al directorio del proyecto: `cd Api_project.js`
 3. Abre el archivo `index.html` en tu navegador web.
+
+### Instrucciones de uso
+1. Se debe adquirir una API key desde este [Link](https://developers.themoviedb.org/3/getting-started/introduction) .
+2. El usuario debe crear una carpeta js dentro de la carpeta src.
+3. Dentro de la carpeta js, se debe crear un archivo Api_key.js.
+4. En el archivo creado, se debe escribir la siguiente línea de código: export const apiKey = "La clave adquirida en el primer paso";.
 
 # Arquitectura del Código
 A continuación se explica la estructura de carpetas y los archivos relevantes y su ubicación.
@@ -46,8 +52,8 @@ A continuación se presentan los links de interés que se deben tener en cuenta 
 En un futuro serán añadidos varios datos relevantes y funcionalidades.
 - Nombre del Director/a de cada película.
 - Trailer de la película.
-- Creación de usuario
-- Gestión personalizada de favoritos
+- Creación de usuario.
+- Gestión personalizada de favoritos.
 - Recomendación de películas personalizadas.
 
 ## Siempre tener en cuenta
