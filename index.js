@@ -1,5 +1,3 @@
-
-// const apiKey = "523f61468ef50f89408cd3c6eee9a9a0";
 import {apiKey} from "./src/js/Api_key.js";
 let genres;
 let loadedMovies = new Set();
@@ -98,7 +96,7 @@ async function searchMovies() {
       const movies = data.results;
 
       const moviesContainer = document.getElementById("movies-container");
-      const searchFeedbackText = document.getElementById("search-feedback-text");
+      // const searchFeedbackText = document.getElementById("search-feedback-text");
       const searchFeedbackInvalid = document.getElementById("search-feedback-invalid");
 
       if (searchQuery === "") {
@@ -120,7 +118,7 @@ async function searchMovies() {
               const movieElement = createMovieCard(movie, genres);
               moviesContainer.appendChild(movieElement);
           });
-          searchFeedbackText.textContent = "";
+          // searchFeedbackText.textContent = "";
           searchFeedbackInvalid.style.display = "none";
       }
   } catch (error) {
