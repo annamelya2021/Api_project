@@ -1,5 +1,6 @@
 
-const apiKey = "523f61468ef50f89408cd3c6eee9a9a0";
+// const apiKey = "523f61468ef50f89408cd3c6eee9a9a0";
+import {apiKey} from "./src/js/Api_key.js";
 let genres;
 let loadedMovies = new Set();
 
@@ -299,17 +300,35 @@ async function getGenres(genreIds) {
 
 // PARTE DE LANDER
 
+// function addToFavorites(movie) {
+//   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+//   const isDuplicate = favorites.some(favorite => favorite.id === movie.id);
+//   if (isDuplicate) {
+//     alert("This movie is already in favorites!");
+//     return;
+//   }
+//   favorites.push(movie);
+//   localStorage.setItem("favorites", JSON.stringify(favorites));
+//   alert("Movie added to Favorites");
+// }
+
 function addToFavorites(movie) {
   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   const isDuplicate = favorites.some(favorite => favorite.id === movie.id);
   if (isDuplicate) {
-    alert("This movie is already in favorites!");
+    Swal.fire("This movie is already in favorites!");
+    const modal = document.getElementById("modal");
+    modal.style.display = "none";
     return;
   }
   favorites.push(movie);
   localStorage.setItem("favorites", JSON.stringify(favorites));
-  alert("Movie added to Favorites");
+  Swal.fire("Movie added to Favorites");
+
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
 }
+
 
 async function showFavorites() {
   const favoritesContainer = document.getElementById("favorites-container");
@@ -335,6 +354,9 @@ function removeFromFavorites(movie) {
   favorites = favorites.filter((fav) => fav.id !== movie.id);
   localStorage.setItem("favorites", JSON.stringify(favorites));
   showFavorites(); 
+
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
 }
 
 

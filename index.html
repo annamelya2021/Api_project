@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
   <link rel="stylesheet" href="./src/css/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
   <header class="header">
@@ -21,7 +23,7 @@
       </ul>
     </nav>
   </header>
-
+<main>
   <!-- Agrega un contenedor envolvente para los elementos -->
   <div class="container-wrapper">
     <!-- Contenedor para el campo de búsqueda y el filtro de géneros -->
@@ -38,7 +40,7 @@
 
       <!-- Filtro de géneros -->
       <select id="genre-filter" onchange="fetchPopularMovies(this.value)"> 
-        <option value="">All the genres</option>
+        <option value="">Search by genre</option>
         <option value="28">Action</option>
         <option value="12">Adventure</option>
         <option value="16">Animation</option>
@@ -63,7 +65,7 @@
 
     
     <div class="container">
-      <h2 >Want to watch a movie?:</h2>
+      <h2 >What movie would you like to watch?</h2>
     </div>
   </div>
 
@@ -72,14 +74,18 @@
     <div id="movies-container">
       <!-- <img id="default-image" src="hhttps://amicus-vet.ru/images/statii/golubaya.jpg" alt="Default Image"> -->
     </div>
-    <script src="index.js" type="module"></script>
+  
     <div id="modal" class="modal">
       <div id="modal-content" class="modal-content">
           
           <div id="modal-poster"></div>
           <div id="modal-info" class="modal-info"></div>
+          <div id="notification"></div>
+
+
       </div>
   </div>
 </main>
+<script src="index.js" type="module"></script>
   </body>
 </html>
