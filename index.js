@@ -1,5 +1,6 @@
 
-const apiKey = "523f61468ef50f89408cd3c6eee9a9a0";
+// const apiKey = "523f61468ef50f89408cd3c6eee9a9a0";
+import {apiKey} from "./src/js/Api_key.js";
 let genres;
 let loadedMovies = new Set();
 
@@ -316,11 +317,16 @@ function addToFavorites(movie) {
   const isDuplicate = favorites.some(favorite => favorite.id === movie.id);
   if (isDuplicate) {
     Swal.fire("This movie is already in favorites!");
+    const modal = document.getElementById("modal");
+    modal.style.display = "none";
     return;
   }
   favorites.push(movie);
   localStorage.setItem("favorites", JSON.stringify(favorites));
-  Swal.fire("Movie added to Favoritesпше");
+  Swal.fire("Movie added to Favorites");
+
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
 }
 
 
@@ -348,6 +354,9 @@ function removeFromFavorites(movie) {
   favorites = favorites.filter((fav) => fav.id !== movie.id);
   localStorage.setItem("favorites", JSON.stringify(favorites));
   showFavorites(); 
+
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
 }
 
 

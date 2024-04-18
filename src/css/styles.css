@@ -124,8 +124,18 @@ li {
   display: flex;
   align-items: center;
   flex-direction: column; 
-  padding: 20px;
+  padding: 5px 0 0 20px;
 }
+
+
+.swal2-confirm.swal2-styled {
+  background-color: #ec5cff !important;
+  width: 100% !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+
 
 .movie-card h2 {
   margin: 0;

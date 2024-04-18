@@ -21,7 +21,7 @@
       </ul>
     </nav>
   </header>
-
+<main>
   <!-- Agrega un contenedor envolvente para los elementos -->
   <div class="container-wrapper">
     <!-- Contenedor para el campo de búsqueda y el filtro de géneros -->
@@ -38,7 +38,7 @@
 
       <!-- Filtro de géneros -->
       <select id="genre-filter" onchange="fetchPopularMovies(this.value)"> 
-        <option value="">All the genres</option>
+        <option value="">Search by genre</option>
         <option value="28">Action</option>
         <option value="12">Adventure</option>
         <option value="16">Animation</option>
@@ -63,7 +63,7 @@
 
     
     <div class="container">
-      <h2 >Want to watch a movie?:</h2>
+      <h2 >What movie would you like to watch?</h2>
     </div>
   </div>
 
@@ -72,7 +72,7 @@
     <div id="movies-container">
       <!-- <img id="default-image" src="hhttps://amicus-vet.ru/images/statii/golubaya.jpg" alt="Default Image"> -->
     </div>
-    <script src="index.js" type="module"></script>
+  
     <div id="modal" class="modal">
       <div id="modal-content" class="modal-content">
           
@@ -84,5 +84,6 @@
       </div>
   </div>
 </main>
+<script src="index.js" type="module"></script>
   </body>
 </html>
