@@ -305,6 +305,9 @@ function addToFavorites(movie) {
   favorites.push(movie);
   localStorage.setItem("favorites", JSON.stringify(favorites));
   Swal.fire("Movie added to Favorites");
+
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
 }
 
 
