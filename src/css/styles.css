@@ -9,11 +9,7 @@
   padding-top: 20px;
 }
 
-.container {
-  display: flex;
-  align-items: center;
-  width: 100%; 
-}
+
   #search-input,#genre-filter  {
     flex-grow: 1; 
     margin-right: 10px;
@@ -58,7 +54,12 @@ body {
 .container {
   display: flex;
   align-items: center;
-  width: 100%; }
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  }
+
 
 #search-input, #genre-filter {
   flex-grow: 1; 
@@ -82,7 +83,7 @@ body {
   margin-top: 40px; }
 
 
-.movies-container {
+#movies-container {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -165,11 +166,6 @@ header {
   padding: 0 20px;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
 
 .header-photo {
   width: 100%;
