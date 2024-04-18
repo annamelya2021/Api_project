@@ -2,7 +2,6 @@
 .DS_Store
 .vscode/
 .idea/
-Api_key.js
 src/js/Api_key.js
 # Logs
 logs
